@@ -5,8 +5,9 @@ import 'package:digitalridr/custom_icons/digitalridr_app_icons.dart';
 import 'package:digitalridr/services/cloudinary_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:digitalridr/widget/tab_pages.dart';
+import 'package:digitalridr/widget/personalised_feed.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
+import 'package:digitalridr/widget/network_aware_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -92,23 +93,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    List<Widget> tabPages = [
-      personalisedFeedList(context, _isLoading),
-      filteredFeed(context),
-      filteredFeed(context),
-      filteredFeed(context),
-      filteredFeed(context),
-    ];
-
-    List<String> tabTitles = [
-      'For You',
-      'Popular',
-      'Trending',
-      'Lowest Prices',
-      'Highest Prices',
-    ];
-
-
     return Scaffold(
       // Use SafeArea to avoid status bar overlap if you want
       body: SafeArea(
@@ -125,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: (165 - MediaQuery.of(context).padding.top)),
-                        personalisedFeedList(context, _isLoading),
+                        Expanded(child: NetworkAwareWidget(child: PersonalisedFeed(isLoading: _isLoading))),
                         const SizedBox(height: 40), // bottom padding
                       ],
                     ),

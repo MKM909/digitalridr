@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class ApartmentPage extends StatefulWidget {
   const ApartmentPage({super.key});
@@ -11,6 +12,8 @@ class ApartmentPage extends StatefulWidget {
 class _ApartmentPageState extends State<ApartmentPage> {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
@@ -18,19 +21,17 @@ class _ApartmentPageState extends State<ApartmentPage> {
         child: Center(
           child: Container(
             color: Colors.white,
-            child: const Text(
-              'Apartments Still In Development',
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.normal,
-                  fontSize: 30
-              ),
-            ),
+            child:  Center(
+                child: Lottie.asset(
+                  'assets/lottie/empty_ghost.json',
+                  width: screenWidth - 65,
+                  repeat: false,
+                  animate: true,
+                ),
           ),
         ),
       ),
+      )
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:digitalridr/models/feature_item.dart';
 
 enum GuestSpace { entireApartment, room, sharedHostel }
@@ -42,7 +43,7 @@ enum ApartmentTypes {
 }
 
 class Apartment {
-  final String id; // ⬅ Updated to String
+  final String id;
   final String title;
   final String description;
   final int price;
@@ -99,52 +100,41 @@ class Apartment {
     required this.rating,
   }) : houseType = getApartmentType(housetype);
 
-  // 🔽 FROM JSON
-  factory Apartment.fromJson(Map<String, dynamic> json) {
+  /// Create Apartment object from Firestore document
+  factory Apartment.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
     return Apartment(
-      id: json['_id']?.toString() ?? '',        // ⬅ Correct field & type
-      title: json['title'] ?? '',
-      description: json['description'] ?? '',
-      price: json['price'] ?? 0,
-
-      // ⬅ Cleaned image parser for comma-separated string
-      images: _parseImages(json),
-
-      localGovernment: json['localGovernment'] ?? '',
-      streetAddress: json['streetAddress'] ?? '',
-      city: json['city'] ?? '',
-      country: json['country'] ?? '',
-      housetype: _parseApartmentType(json['houseType']),
-      guestSpace: _parseGuestSpace(json['guestSpace']),
-      amountOfAllowedGuest: json['amountOfAllowedGuest'] ?? 0,
-      amountOfBedRooms: json['amountOfBedRooms'] ?? 0,
-      amountOfBeds: json['amountOfBeds'] ?? 0,
-      amountOfBathrooms: json['amountOfBathrooms'] ?? 0,
-
-      features: _parseFeatures(json['features']),
-
-      publishedBy: json['publishedBy'] ?? '',
-      status: _parseStatus(json['status']),
-      contact: json['contact'] ?? '',
-
-      // ⬅ Server timestamps
-      createdAt: DateTime.tryParse(json['createdAt'] ?? '') ?? DateTime.now(),
-      updatedAt: DateTime.tryParse(json['updatedAt'] ?? '') ?? DateTime.now(),
-
-      listingDuration: json['listingDuration'] ?? '',
-      interestedUsers: json['interestedUsers'] ?? 0,
-      numberOfReviews: json['numberOfReviews'] ?? 0,
-      discountPercentage: json['discountPercentage'] ?? 0,
-
-      rating: json['rating'] != null
-          ? double.tryParse(json['rating'].toString()) ?? 0.0
-          : 0.0,
+      id: doc.id,
+      title: data['title'] ?? '',
+      description: data['description'] ?? '',
+      price: data['price'] ?? 0,
+      images: List<String>.from(data['images'] ?? []),
+      localGovernment: data['localGovernment'] ?? '',
+      streetAddress: data['streetAddress'] ?? '',
+      city: data['city'] ?? '',
+      country: data['country'] ?? '',
+      housetype: _parseApartmentType(data['houseType']),
+      guestSpace: _parseGuestSpace(data['guestSpace']),
+      amountOfAllowedGuest: data['amountOfAllowedGuest'] ?? 0,
+      amountOfBedRooms: data['amountOfBedRooms'] ?? 0,
+      amountOfBeds: data['amountOfBeds'] ?? 0,
+      amountOfBathrooms: data['amountOfBathrooms'] ?? 0,
+      features: _parseFeatures(data['features']),
+      publishedBy: data['publishedBy'] ?? '',
+      status: _parseStatus(data['status']),
+      contact: data['contact'] ?? '',
+      createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      updatedAt: (data['updatedAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      listingDuration: data['listingDuration'] ?? '',
+      interestedUsers: data['interestedUsers'] ?? 0,
+      numberOfReviews: data['numberOfReviews'] ?? 0,
+      discountPercentage: data['discountPercentage'] ?? 0,
+      rating: (data['rating'] ?? 0).toDouble(),
     );
   }
 
-  // 🔼 TO JSON
-  Map<String, dynamic> toJson() => {
-    '_id': id,
+  /// Convert Apartment object to Firestore data
+  Map<String, dynamic> toFirestore() => {
     'title': title,
     'description': description,
     'price': price,
@@ -163,8 +153,8 @@ class Apartment {
     'publishedBy': publishedBy,
     'status': status.name,
     'contact': contact,
-    'createdAt': createdAt.toIso8601String(),
-    'updatedAt': updatedAt.toIso8601String(),
+    'createdAt': FieldValue.serverTimestamp(),
+    'updatedAt': FieldValue.serverTimestamp(),
     'listingDuration': listingDuration,
     'interestedUsers': interestedUsers,
     'numberOfReviews': numberOfReviews,
@@ -173,9 +163,7 @@ class Apartment {
   };
 }
 
-//
-// -------- ENUM PARSERS --------
-//
+/// -------- ENUM PARSERS --------
 
 ApartmentTypes _parseApartmentType(String? type) {
   if (type == null) return ApartmentTypes.studio;
@@ -211,25 +199,14 @@ Status _parseStatus(String? status) {
   }
 }
 
-List<String> _parseImages(Map<String, dynamic> json) {
-  final raw = json['image'] ?? json['images'];
-
-  if (raw == null || raw is! String) return [];
-
-  return raw.split(',').map((e) => e.trim()).toList();
-}
-
 List<FeatureItem> _parseFeatures(dynamic features) {
   if (features == null) return [];
-
   List<String> featureNames = [];
-
   if (features is String) {
     featureNames = features.split(',').map((e) => e.trim()).toList();
   } else if (features is List) {
     featureNames = features.map((e) => e.toString().trim()).toList();
   }
-
   return featureNames.map((name) {
     final match = Feature.values.firstWhere(
           (f) => f.name.toLowerCase() == name.toLowerCase(),

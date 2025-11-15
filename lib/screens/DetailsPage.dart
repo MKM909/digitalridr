@@ -68,7 +68,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                 scrollDirection: Axis.horizontal,
                                 itemCount: widget.apartment.images.length,
                                 itemBuilder: (context, index) {
-                                  return Image.asset(
+                                  return Image.network(
                                     widget.apartment.images[index],
                                     fit: BoxFit.cover,
                                     width: MediaQuery.of(context).size.width,
@@ -537,7 +537,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             radius: 22,
                             child: Center(
                               child: Text(
-                                "+${widget.apartment.images.length - 2}",
+                                "+${widget.apartment.images.length - 3}",
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontFamily: 'Poppins',
@@ -552,13 +552,13 @@ class _DetailsPageState extends State<DetailsPage> {
                             children: [
                               CircleAvatar(
                                 backgroundImage:
-                                AssetImage(widget.apartment.images[2]),
+                                NetworkImage(widget.apartment.images[0]),
                                 radius: 22,
                               ),
                               const SizedBox(height: 10),
                               CircleAvatar(
                                 backgroundImage:
-                                AssetImage(widget.apartment.images[3]),
+                                NetworkImage(widget.apartment.images[1]),
                                 radius: 22,
                               ),
                               const SizedBox(height: 10),
@@ -567,7 +567,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                 radius: 22,
                                 child: Center(
                                   child: Text(
-                                    "+${widget.apartment.images.length - 2}",
+                                    "+${widget.apartment.images.length - 3}",
                                     style: const TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontFamily: 'Poppins',

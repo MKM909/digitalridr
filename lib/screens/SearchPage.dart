@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -10,25 +11,26 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(40.0),
-        child: Center(
-          child: Container(
-            color: Colors.white,
-            child: const Text(
-              'Search Still In Development',
-              textAlign: TextAlign.start,
-              style: TextStyle(
-                  color: Colors.black,
-                  fontFamily: 'Poppins',
-                  fontWeight: FontWeight.normal,
-                  fontSize: 30
+        backgroundColor: Colors.white,
+        body: Padding(
+          padding: const EdgeInsets.all(40.0),
+          child: Center(
+            child: Container(
+              color: Colors.white,
+              child:  Center(
+                child: Lottie.asset(
+                  'assets/lottie/empty_ghost.json',
+                  width: screenWidth - 65,
+                  repeat: false,
+                  animate: true,
+                ),
               ),
             ),
           ),
-        ),
-      ),
+        )
     );
   }
 }
