@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "426036338767",
+    "project_id": "digitalridr-6ab34",
+    "storage_bucket": "digitalridr-6ab34.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426036338767:android:641e1cda5e1884f035ca3a",
+        "android_client_info": {
+          "package_name": "com.mickoappservices.digital.ridr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426036338767-qu1vgsg0je8qnk0opp2mpn3qvta5e0nv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcexdTJ6sSnVeO2RT4dw2_UMFhatDEskY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426036338767-qu1vgsg0je8qnk0opp2mpn3qvta5e0nv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
