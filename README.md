@@ -1,27 +1,27 @@
-# Digital Ridr 🚴‍♂️📱
+# Digital Ridr 🏠📱
 
-**Digital Ridr** is a modern digital platform designed to simplify, track, and enhance riding experiences through smart technology. Built with performance, clean UI, and scalability in mind, Digital Ridr focuses on delivering a smooth and reliable user experience across devices.
+**Digital Ridr** is an apartment booking application that helps users easily discover, view, and book available apartments through a clean, modern, and intuitive digital experience. The app is focused on simplicity, performance, and real-world usability.
 
 ---
 
 ## ✨ Features
 
-* 🚀 Clean, modern, and responsive UI
-* 📊 Real-time or structured ride-related data handling
-* 🔐 Secure and scalable architecture
-* ⚡ Optimized performance and smooth interactions
-* 🧩 Modular and maintainable codebase
+* 🏘️ Browse available apartments with key details
+* 🔍 Filter and search by location, price, and preferences
+* 📸 Apartment images and detailed descriptions
+* 📅 Simple booking and reservation flow
+* 🔐 Secure user authentication
+* ⚡ Fast performance with a smooth UI experience
 
 ---
 
 ## 🛠️ Tech Stack
 
-> *Update this section if needed*
-
-* **Frontend:** Flutter / Web / Mobile UI
-* **Backend:** Node.js / Firebase / REST APIs
-* **State Management:** Provider / Riverpod / Bloc
-* **Database:** Firebase / PostgreSQL / MongoDB
+* **Frontend:** Flutter
+* **Backend:** Firebase / REST APIs
+* **State Management:** Provider / Riverpod
+* **Database:** Firebase Firestore / Realtime Database
+* **Authentication:** Firebase Auth
 * **Version Control:** Git & GitHub
 
 ---
@@ -30,11 +30,12 @@
 
 ```
 DigitalRidr/
-├── lib/              # Application source code
+├── lib/              # Flutter source code
 ├── assets/           # Images, icons, fonts
-├── services/         # API and business logic
 ├── models/           # Data models
-├── utils/            # Helpers & constants
+├── services/         # API & backend services
+├── screens/          # App screens / pages
+├── widgets/          # Reusable UI components
 └── README.md         # Project documentation
 ```
 
@@ -44,18 +45,15 @@ DigitalRidr/
 
 ### Prerequisites
 
+* Flutter SDK
 * Git
-* Flutter SDK / Node.js (depending on platform)
-* Android Studio / VS Code
+* Android Studio or VS Code
 
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/digital-ridr.git
-cd digital-ridr
-```
-
-```bash
+git clone https://github.com/MKM909/digitalridr.git
+cd digitalridr
 flutter pub get
 flutter run
 ```
@@ -72,17 +70,18 @@ flutter test
 
 ## 📸 Screenshots / Demo
 
-> Add screenshots or a demo video link here
+> Add screenshots or a demo video here
 
 ---
 
 ## 📌 Roadmap
 
-* [ ] User authentication
-* [ ] Ride analytics & tracking
-* [ ] Offline support
-* [ ] Performance optimizations
-* [ ] Deployment & production build
+* [ ] Apartment owner listings
+* [ ] Booking confirmation & history
+* [ ] In-app messaging
+* [ ] Payment integration
+* [ ] Admin dashboard
+* [ ] Deployment to Play Store
 
 ---
 
@@ -90,10 +89,10 @@ flutter test
 
 Contributions are welcome!
 
-1. Fork the repo
-2. Create a feature branch (`git checkout -b feature/new-feature`)
-3. Commit changes (`git commit -m "Add new feature"`)
-4. Push to branch (`git push origin feature/new-feature`)
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m "Add new feature"`)
+4. Push to the branch (`git push origin feature/your-feature`)
 5. Open a Pull Request
 
 ---
@@ -107,11 +106,10 @@ This project is licensed under the **MIT License**.
 ## 👤 Author
 
 **Micah Okoh**
-Software Developer
+Flutter & Software Developer
 
 * GitHub: [https://github.com/MKM909](https://github.com/MKM909)
-* Portfolio: *Add your portfolio link here*
 
 ---
 
-> _Digital Ridr — Built with passion, precision, and pur
+> _Digital Ridr — Making apartment booking simple, fast, and acces
